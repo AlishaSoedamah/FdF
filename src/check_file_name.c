@@ -15,11 +15,9 @@
 
 int	check_name(char **av)
 {
-	int		i;
 	int		len;
 	char	*start;
 
-	i = 0;
 	len = ft_strlen(av[1]);
 	if (len < 4)
 		return (1);

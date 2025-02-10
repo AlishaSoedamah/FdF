@@ -6,16 +6,13 @@
 /*   By: ksoedama <ksoedama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 19:08:32 by ksoedama          #+#    #+#             */
-/*   Updated: 2025/02/07 16:24:41 by ksoedama         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:23:43 by ksoedama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-// |1     0           0| |x|   |        x        |   |x'|
-// |0   cos θ    −sin θ| |y| = |y cos θ − z sin θ| = |y'|
-// |0   sin θ     cos θ| |z|   |y sin θ + z cos θ|   |z'|
-t_3d_points	rotate_x(t_3d_points pointer, double angle)
+static t_3d_points	rotate_x(t_3d_points pointer, double angle)
 {
 	double	temp_y;
 	double	temp_z;
@@ -27,10 +24,7 @@ t_3d_points	rotate_x(t_3d_points pointer, double angle)
 	return (pointer);
 }
 
-// // | cos θ    0   sin θ| |x|   | x cos θ + z sin θ|   |x'|
-// // |   0      1       0| |y| = |         y        | = |y'|
-// // |−sin θ    0   cos θ| |z|   |−x sin θ + z cos θ|   |z'|
-t_3d_points	rotate_y(t_3d_points pointer, double angle)
+static t_3d_points	rotate_y(t_3d_points pointer, double angle)
 {
 	double	temp_x;
 	double	temp_z;
@@ -42,10 +36,7 @@ t_3d_points	rotate_y(t_3d_points pointer, double angle)
 	return (pointer);
 }
 
-// // |cos θ   −sin θ   0| |x|   |x cos θ − y sin θ|   |x'|
-// // |sin θ    cos θ   0| |y| = |x sin θ + y cos θ| = |y'|
-// // |  0       0      1| |z|   |        z        |   |z'|
-t_3d_points	rotate_z(t_3d_points pointer, double angle)
+static t_3d_points	rotate_z(t_3d_points pointer, double angle)
 {
 	double	temp_x;
 	double	temp_y;

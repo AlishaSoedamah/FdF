@@ -1,8 +1,8 @@
 NAME = fdf
 HEADER = -I ./includes -I $(PATH_LIBFT)/includes -I $(PATH_MLX)/include
 CC = cc
-CFLAGS = -MMD -fsanitize=address,undefined # -Wall -Wextra -Werror -g3 
-SRC = fdf.c projection.c read_map.c check_file_name.c hooks.c line.c vector.c rotate.c zoom.c
+CFLAGS = -MMD -fsanitize=address,undefined -O3 -Wall -Wextra -Werror -g3
+SRC = fdf.c projection.c read_map.c check_file_name.c hooks.c line.c vector.c rotate.c zoom.c draw.c parse_map.c
 SRC_DIR = src
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 OBJ_DIR = obj

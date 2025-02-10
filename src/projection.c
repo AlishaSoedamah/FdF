@@ -12,11 +12,7 @@
 
 #include "fdf.h"
 
-// x' = (x-z)/ sqrt(2)
-// y' = (x + 2y + z) / sqrt(6)
-
-t_3d_points	isometric(t_3d_points coordinates, unsigned int width,
-		unsigned int height)
+t_3d_points	isometric(t_3d_points coordinates)
 {
 	float	tmp;
 

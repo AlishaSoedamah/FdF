@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 18:24:18 by ksoedama          #+#    #+#             */
-/*   Updated: 2025/02/07 16:36:50 by ksoedama         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:22:27 by ksoedama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_vect_3	vec_3_sub(t_vect_3 a, t_vect_3 b)
 
 t_vect_3	vec_3_scale(t_vect_3 vec, float scaler)
 {
-	t_vect_3 zoomed_vec;
+	t_vect_3	zoomed_vec;
 
 	zoomed_vec.x = vec.x * scaler;
 	zoomed_vec.y = vec.y * scaler;
