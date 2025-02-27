@@ -1,13 +1,11 @@
 NAME = fdf
 HEADER = -I ./includes -I $(PATH_LIBFT)/includes -I $(PATH_MLX)/include
 CC = cc
-CFLAGS = -MMD -fsanitize=address,undefined -O3 -Wall -Wextra -Werror -g3
-SRC = fdf.c projection.c read_map.c check_file_name.c hooks.c line.c vector.c rotate.c zoom.c draw.c parse_map.c
+CFLAGS = -Ofast -Wall -Wextra -Werror -g
+SRC = fdf.c read_map.c check_file_name.c hooks.c line.c vector.c parse_map.c draw.c projection.c utils.c
 SRC_DIR = src
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 OBJ_DIR = obj
-DEP = $(OBJ:%.o=%.d)
-
 LIB_DIR = libs
 LIBFT = $(PATH_LIBFT)/libft.a
 PATH_LIBFT = $(LIB_DIR)/libft
@@ -31,8 +29,6 @@ $(MLX):
 
 $(LIBFT):
 	@make -C $(PATH_LIBFT)
-	
--include $(DEP)
 
 clean:
 	@echo "Cleaning objs"

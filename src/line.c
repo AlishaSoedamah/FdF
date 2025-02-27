@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 19:27:22 by ksoedama          #+#    #+#             */
-/*   Updated: 2025/02/10 14:19:45 by ksoedama         ###   ########.fr       */
+/*   Updated: 2025/02/12 18:26:45 by ksoedama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	horizontal_line(mlx_image_t *img, t_3d_points start,
 		dy = -dy;
 	}
 	d = (2 * dy) - dx;
-	while (start.pos.x++ < end.pos.x)
+	while (start.pos.x++ <= end.pos.x)
 	{
 		window_limit(img, start);
 		if (d > 0)
@@ -59,13 +59,13 @@ static void	vertical_line(mlx_image_t *img, t_3d_points start, t_3d_points end)
 	dx = end.pos.x - start.pos.x;
 	dy = end.pos.y - start.pos.y;
 	xi = 1;
-	if (dy < 0)
+	if (dx < 0)
 	{
 		xi = -1;
 		dx = -dx;
 	}
 	d = (2 * dx) - dy;
-	while (start.pos.y++ < end.pos.y)
+	while (start.pos.y++ <= end.pos.y)
 	{
 		window_limit(img, start);
 		if (d > 0)

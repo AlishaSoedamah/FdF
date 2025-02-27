@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:27:18 by ksoedama          #+#    #+#             */
-/*   Updated: 2025/02/10 14:15:57 by ksoedama         ###   ########.fr       */
+/*   Updated: 2025/02/14 16:54:49 by ksoedama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ int	get_map_size(t_map *map, char *filename)
 			break ;
 		if (ft_strchr(line, '\n'))
 			*ft_strchr(line, '\n') = '\0';
-		map->width = ft_count_points(line, ' ');
+		if (map->width == 0)
+			map->width = ft_count_points(line, ' ');
+		else if (map->width != ft_count_points(line, ' '))
+			return (free(line), close(fd), FAILURE);
 		map->height++;
 		free(line);
 	}

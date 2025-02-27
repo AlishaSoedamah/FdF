@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 16:24:58 by ksoedama          #+#    #+#             */
-/*   Updated: 2025/02/10 14:24:41 by ksoedama         ###   ########.fr       */
+/*   Updated: 2025/02/16 11:51:26 by ksoedama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,13 @@
 # include <fcntl.h>
 # include <math.h>
 
+# define MAP_MIN -1000
+# define MAP_MAX 1000
 # define WIDTH 1920
 # define HEIGHT 1080
 
-# define PI 3.14159265359
-# define SQRT2 1.41421356237309514547
-# define SQRT6 2.44948974278317788134
-
-# define TILEZOOM 10
-# define ANGLE 40
+# define TILEZOOM 20
+# define TILEZOOM_Z 20
 
 # define SUCCESS 1
 # define FAILURE 0
@@ -61,7 +59,9 @@ int				parse_file(t_map *map, char *filename);
 void			draw_line(mlx_image_t *img, t_3d_points start, t_3d_points end);
 void			draw_map(mlx_image_t *img, t_map *map);
 void			my_keyhook(mlx_key_data_t keydata, void *param);
-void			zoom(t_map *map);
-t_3d_points		rotate_xyz(t_3d_points pointer, t_vect_3 angle);
+void			ft_free(char **arr);
+t_3d_points		isometric(t_3d_points coordinates);
+void			hook_loop(void *param);
+void			hook_resize(int32_t width, int32_t height, void *param);
 
 #endif

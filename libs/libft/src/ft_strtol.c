@@ -6,19 +6,13 @@
 /*   By: ksoedama <ksoedama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:07:59 by ksoedama          #+#    #+#             */
-/*   Updated: 2025/02/05 19:21:58 by ksoedama         ###   ########.fr       */
+/*   Updated: 2025/02/16 12:10:00 by ksoedama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <limits.h>
-
-
-static int	ft_isspace(int c)
-{
-	return (c == ' ' || c == '\n' || c == '\t' || c == '\v' || c == '\r'
-		|| c == '\f');
-}
+#include <stdio.h>
 
 static long	overflow(int sign, int *is_overflow)
 {
@@ -48,28 +42,40 @@ static void	set_endptr(char *ptr, char **end_ptr)
 		*end_ptr = ptr;
 }
 
+static void	rm_color_prefix(char *s, int *sign, int *i)
+{
+	*sign = 1;
+	while (ft_isspace(s[*i]))
+		(*i)++;
+	if (s[*i] == '+' || s[*i] == '-')
+	{
+		if (s[*i] == '-')
+		{
+			*sign = -1;
+			(*i)++;
+		}
+	}
+	if (ft_strncmp(s, "0x", 2) == 0)
+		*i += 2;
+}
+
 long	ft_strtol(char *s, char **end_ptr, int *is_overflow, int base)
 {
 	int		i;
-	int		sign;
 	long	res;
 	int		digit;
+	int		sign;
 
+	sign = 0;
 	i = 0;
-	sign = 1;
 	res = 0;
 	if (is_overflow != NULL)
 		*is_overflow = 0;
-	while (ft_isspace(s[i]))
-		i++;
-	if (s[i] == '+' || s[i] == '-')
-		if (s[i++] == '-')
-			sign = -1;
-	if (ft_strncmp(s, "0x", 2) == 0)
-		i += 2;
+	rm_color_prefix(s, &sign, &i);
 	while (s[i])
 	{
-		base_int(s[i], &digit);
+		if (base_int(s[i], &digit) || digit >= base)
+			break ;
 		if (res > (LONG_MAX - digit) / base)
 		{
 			set_endptr((char *)s, end_ptr);
@@ -78,5 +84,6 @@ long	ft_strtol(char *s, char **end_ptr, int *is_overflow, int base)
 		res = res * base + digit;
 		i++;
 	}
-	return (set_endptr(&s[i], end_ptr), res * sign);
+	set_endptr(&s[i], end_ptr);
+	return (res * sign);
 }

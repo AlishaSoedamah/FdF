@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:23:03 by ksoedama          #+#    #+#             */
-/*   Updated: 2025/01/24 15:35:32 by ksoedama         ###   ########.fr       */
+/*   Updated: 2025/02/15 12:52:07 by ksoedama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*gnl_strjoin(char **line, char *buffer)
 {
-	char *new;
+	char	*new;
 
 	if (*line == NULL)
 	{

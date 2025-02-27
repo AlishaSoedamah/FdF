@@ -6,7 +6,7 @@
 /*   By: ksoedama <ksoedama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 15:39:51 by ksoedama          #+#    #+#             */
-/*   Updated: 2025/02/10 14:26:25 by ksoedama         ###   ########.fr       */
+/*   Updated: 2025/02/15 21:58:31 by ksoedama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,8 @@ static void	init_map(t_map *map)
 	map->width = 0;
 	map->height = 0;
 	map->map = NULL;
-	map->position = vec_3(0, 0, 10);
+	map->position = vec_3(0, 0, 0);
 	map->angles = vec_3(0, 0, 0);
-}
-
-static void	hook_resize(int32_t width, int32_t height, void *param)
-{
-	t_fdf	*fdf;
-
-	fdf = (t_fdf *)param;
-	mlx_resize_image(fdf->img, width, height);
-	ft_bzero(fdf->img->pixels, width * height * sizeof(int));
-	fdf->map.position = vec_3(fdf->img->width / 2, fdf->img->height / 2, 0);
-	fdf->is_draw = 1;
-}
-
-void	hook_loop(void *param)
-{
-	t_fdf	*fdf;
-
-	fdf = (t_fdf *)param;
-	if (fdf->is_draw)
-	{
-		draw_map(fdf->img, &fdf->map);
-		fdf->is_draw = 1;
-	}
 }
 
 static void	make_fdf(t_fdf fdf)
@@ -64,17 +41,22 @@ int	main(int ac, char **av)
 	t_fdf	fdf;
 
 	if (ac <= 1 || ac > 2)
-		return (ft_putstr_fd("Usage: ./fdf [map.fdf]\n", 2), FAILURE);
+		return (ft_putendl_fd("Usage: ./fdf [map.fdf]", 2), FAILURE);
 	if (ac == 2)
 	{
 		if (check_name(av))
-			return (ft_putstr_fd("Usage: ./fdf [map.fdf]\n", 2), FAILURE);
+			return (ft_putendl_fd("Usage: ./fdf [map.fdf]", 2), FAILURE);
 		fdf.is_draw = 1;
 		init_map(&fdf.map);
 		if (get_map_size(&fdf.map, av[1]) == FAILURE)
-			return (ft_putstr_fd("Can't get map size\n", 2), FAILURE);
-		if (parse_file(&fdf.map, av[1]))
-			make_fdf(fdf);
+			return (ft_putendl_fd("Can't get map size", 2), FAILURE);
+		if (parse_file(&fdf.map, av[1]) == FAILURE)
+		{
+			free(fdf.map.map);
+			ft_putendl_fd("Map color or value not valid", 2);
+			return (FAILURE);
+		}
+		make_fdf(fdf);
 		free(fdf.map.map);
 	}
 	return (0);
